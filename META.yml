@@ -1,0 +1,45 @@
+---
+name: Data-Inherited
+version: 1.00
+author:
+  - Marcel Gruenauer <marcel@noug.at>
+abstract: hierarchy-wide accumulation of list and hash results
+license: perl
+build_requires:
+  Test::Pod: 1.20
+  Test::Pod::Coverage: 1.06
+provides:
+  Data::Inherited:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  EVERY:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  EVERY::LAST:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT::ACTUAL:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT::ACTUAL::DISTINCT:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT::ACTUAL::UNSEEN:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT::DISTINCT:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT::DISTINCT::ACTUAL:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT::UNSEEN:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+  NEXT::UNSEEN::ACTUAL:
+    file: lib/Data/Inherited.pm
+    version: 1.00
+generated_by: Module::Build version 0.2611
