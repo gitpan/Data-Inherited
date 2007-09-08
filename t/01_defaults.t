@@ -34,7 +34,7 @@ sub new {
 
 
 
-package Sarariman;
+package Salaryman;
 
 our @ISA = 'Person';
 
@@ -46,9 +46,9 @@ sub DEFAULTS {
 }
 
 
-package LocatedSarariman;
+package LocatedSalaryman;
 
-our @ISA = 'Sarariman';
+our @ISA = 'Salaryman';
 
 use Class::MethodMaker::Util
     get_set_std => 'address';
@@ -86,14 +86,14 @@ is_deeply(\%defaults, {
 }, 'defaults in hash context');
 
 
-$p = Sarariman->new;
+$p = Salaryman->new;
 ok_prop($p,
     first_name => 'John',
     last_name  => 'Smith',
     salary     => 10_000,
 );
 
-$p = LocatedSarariman->new;
+$p = LocatedSalaryman->new;
 ok_prop($p,
     first_name => 'Johan',
     last_name  => 'Smith',

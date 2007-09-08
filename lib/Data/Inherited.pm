@@ -1,18 +1,18 @@
 package Data::Inherited;
 
-# $Id: Inherited.pm,v 1.8 2006/01/16 12:27:47 gr Exp $
+# $Id: Inherited.pm 11427 2006-05-09 13:00:16Z gr $
 
 use strict;
 use warnings;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 
 sub every_list {
     my ($self, $list_name, $override_cache) = @_;
 
     our %every_cache;
-    my $pkg = ref $self;
+    my $pkg = ref $self || $self;   # can also be called as a class method
     my $list;
 
     unless ($list = $override_cache ? undef : $every_cache{$list_name}{$pkg}) {
@@ -34,7 +34,7 @@ sub every_hash {
     my ($self, $hash_name, $override_cache) = @_;
 
     our %every_cache;
-    my $pkg = ref $self;
+    my $pkg = ref $self || $self;   # can also be called as a class method
     my $hash;
 
     unless ($hash = $override_cache ? undef : $every_cache{$hash_name}{$pkg}) {
@@ -262,7 +262,7 @@ This document describes version 1.00 of C<Data::Inherited>.
   package main;
   my $bar = Bar->new;
   print "$_\n" for $bar->every_list('PROPERTIES');
-  
+
 prints
 
   name
@@ -274,7 +274,11 @@ prints
 This is a mixin class. By inheriting from it you get two methods that are able
 to accumulate hierarchy-wide list and hash results.
 
-=head2 every_list(String $method_name, Bool ?$override_cache = 0)
+=head1 METHODS
+
+=over 4
+
+=item every_list(String $method_name, Bool ?$override_cache = 0)
 
 Takes as arguments a method name (mandatory) and a boolean indicating whether
 to override the cache (optional, off by default)
@@ -296,7 +300,7 @@ optional second argument. The result is cached in any case.
 
 See the synopsis for an example.
 
-=head2 every_hash(String $method_name, Bool ?$override_cache = 0)
+=item every_hash(String $method_name, Bool ?$override_cache = 0)
 
 Takes as arguments a method name (mandatory) and a boolean indicating whether
 to override the cache (optional, off by default)
@@ -332,7 +336,7 @@ defaults and much more):
   };
 
 
-  package Sarariman;
+  package Salaryman;
   use base 'Person';
 
   sub DEFAULTS {
@@ -340,28 +344,25 @@ defaults and much more):
   }
 
 
-  package LocatedSarariman;
-  use base 'Sarariman';
+  package LocatedSalaryman;
+  use base 'Salaryman';
 
   # Note: no default for address, but different salary
 
-  sub DEFAULTS { 
+  sub DEFAULTS {
     salary     => 20_000,
     first_name => 'Johan',
   }
 
 
   package main;
-  my $p = LocatedSarariman->new;
+  my $p = LocatedSalaryman->new;
 
   # salary: 20000
   # first_name: Johan
   # last_name: Smith
 
-
-=head1 DIAGNOSTICS
-
-There are no diagnostics for this module.
+=back
 
 =head1 INCOMPATIBILITIES
 
@@ -400,33 +401,10 @@ Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004-2005 by Marcel GrE<uuml>nauer
+Copyright 2004-2007 by Marcel GrE<uuml>nauer
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
-
-=head1 DISCLAIMER OF WARRANTY
-
-BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
-ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
-YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
-NECESSARY SERVICING, REPAIR, OR CORRECTION.
-
-IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE
-LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
-OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
-THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
 
 =cut
 

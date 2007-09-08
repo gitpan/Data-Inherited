@@ -1,173 +1,27 @@
-NAME
-    Data::Inherited - hierarchy-wide accumulation of list and hash results
-
-VERSION
-    This document describes version 1.00 of "Data::Inherited".
-
-SYNOPSIS
-      package Foo;
-      use base 'Data::Inherited';
-      use constant PROPERTIES => (qw/name address/);
-
-      package Bar;
-      use base 'Foo';
-      use constant PROPERTIES => (qw/age/);
-
-      package main;
-      my $bar = Bar->new;
-      print "$_\n" for $bar->every_list('PROPERTIES');
-  
-    prints
-
-      name
-      address
-      age
-
-DESCRIPTION
-    This is a mixin class. By inheriting from it you get two methods that
-    are able to accumulate hierarchy-wide list and hash results.
-
-  every_list(String $method_name, Bool ?$override_cache = 0)
-    Takes as arguments a method name (mandatory) and a boolean indicating
-    whether to override the cache (optional, off by default)
-
-    Causes every method in the object's hierarchy with the given name to be
-    invoked. The resulting list is the combined set of results from all the
-    methods, pushed together in top-to-bottom order (hierarchy-wise).
-
-    "every_list()" returns a list in list context and an array reference in
-    scalar context.
-
-    The result is cached (per calling package) and the next time the method
-    is called from the same package with the same method argument, the
-    cached result is returned. This is to speed up method calls, because
-    internally this module uses NEXT, which is quite slow. It is expected
-    that "every_list()" is used for methods returning static lists (object
-    defaults, static class definitions and such). If you want to override
-    the caching mechanism, you can provide the optional second argument. The
-    result is cached in any case.
-
-    See the synopsis for an example.
-
-  every_hash(String $method_name, Bool ?$override_cache = 0)
-    Takes as arguments a method name (mandatory) and a boolean indicating
-    whether to override the cache (optional, off by default)
-
-    Causes every method in the object's hierarchy with the given name to be
-    invoked. The resulting hash is the combined set of results from all the
-    methods, overlaid in top-to-bottom order (hierarchy-wise).
-
-    "every_hash()" returns a hash in list context and a hash reference in
-    scalar context.
-
-    The cache and the optional cache override argument work like with
-    "every_list()".
-
-    Example (see Class::MethodMaker::Util for a full implementation of
-    instance defaults and much more):
-
-      package Person;
-      use base 'Data::Inherited';
-
-      sub new {
-        my $class = shift;
-        my $self = bless {}, $class;
-        my %args = @_;
-        %args = ($self->every_hash('DEFAULTS'), %args);
-        $self->$_($args{$_}) for keys %args;
-        $self;
-      };
-
-      sub DEFAULTS {
-        first_name => 'John',
-        last_name  => 'Smith',
-      };
-
-      package Sarariman;
-      use base 'Person';
-
-      sub DEFAULTS {
-        salary => 10_000,
-      }
-
-      package LocatedSarariman;
-      use base 'Sarariman';
-
-      # Note: no default for address, but different salary
-
-      sub DEFAULTS { 
-        salary     => 20_000,
-        first_name => 'Johan',
-      }
-
-      package main;
-      my $p = LocatedSarariman->new;
-
-      # salary: 20000
-      # first_name: Johan
-      # last_name: Smith
-
-DIAGNOSTICS
-    There are no diagnostics for this module.
-
-INCOMPATIBILITIES
-    This module relies on NEXT. Until an updated version of NEXT is
-    released, Data::Inherited includes a modified version of NEXT that
-    avoids a subtle bug when used within the stringification method of an
-    overloaded object (patch submitted to the author). It's included within
-    the this file so as to not clutter perl's lib directory, as it's only a
-    temporary measure. Moreover, NEXT is a core perl module, but
-    Data::Inheritance installs in site_perl, leading to potentially more
-    confusion.
-
-    We make perl believe that NEXT is loaded so it won't overwrite our
-    changes with the original NEXT if somewhere it says "use NEXT".
-
-BUGS AND LIMITATIONS
-    No bugs have been reported.
-
-    Please report any bugs or feature requests to
-    "bug-data-inherited@rt.cpan.org", or through the web interface at
-    <http://rt.cpan.org>.
+This is the Perl module Data::Inherited.
 
 INSTALLATION
-    See perlmodinstall for information and options on installing Perl
-    modules.
 
-AVAILABILITY
-    The latest version of this module is available from the Comprehensive
-    Perl Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a
-    CPAN site near you. Or see
-    <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
+Data::Inherited installation is straightforward. If your CPAN shell is set up,
+you should just be able to do
 
-AUTHOR
-    Marcel Grünauer, "<marcel@cpan.org>"
+    % cpan Data::Inherited
 
-COPYRIGHT AND LICENSE
-    Copyright 2004-2005 by Marcel Grünauer
+Download it, unpack it, then build it as per the usual:
 
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
+    % perl Makefile.PL
+    % make && make test
 
-DISCLAIMER OF WARRANTY
-    BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-    FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-    OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-    PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-    EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
-    ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
-    YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
-    NECESSARY SERVICING, REPAIR, OR CORRECTION.
+Then install it:
 
-    IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-    WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-    REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE LIABLE
-    TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR
-    CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
-    SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-    RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-    FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-    SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
-    DAMAGES.
+    % make install
 
+DOCUMENTATION
+
+Data::Inherited documentation is available as in POD. So you can do:
+
+    % perldoc Data::Inherited
+
+to read the documentation online with your favorite pager.
+
+Marcel Gruenauer
