@@ -1,5 +1,8 @@
 Revision history for Perl extension Data::Inherited.
 
+1.02  So Sep  9 22:15:47 CEST 2007
+    - fixed t/01_defaults.t
+
 1.01  Sa Sep  8 14:11:38 CEST 2007
     - changed to new-style distribution (ShipIt, Module::Install)
     - fixed documentation and test file locations

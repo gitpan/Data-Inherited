@@ -9,9 +9,6 @@ package Person;
 
 use base 'Data::Inherited';
 
-use Class::MethodMaker::Util
-    get_set_std => [ qw/first_name last_name/ ];
-
 sub DEFAULTS {
     first_name => 'John',
     last_name  => 'Smith',
@@ -33,25 +30,36 @@ sub new {
 };
 
 
+sub first_name {
+    return $_[0]->{first_name} if @_ == 1;
+    $_[0]->{first_name} = $_[1];
+}
+
+
+sub last_name {
+    return $_[0]->{last_name} if @_ == 1;
+    $_[0]->{last_name} = $_[1];
+}
+
 
 package Salaryman;
 
 our @ISA = 'Person';
-
-use Class::MethodMaker::Util
-    get_set_std => 'salary';
 
 sub DEFAULTS {
     salary => 10_000,
 }
 
 
+sub salary {
+    return $_[0]->{salary} if @_ == 1;
+    $_[0]->{salary} = $_[1];
+}
+
+
 package LocatedSalaryman;
 
 our @ISA = 'Salaryman';
-
-use Class::MethodMaker::Util
-    get_set_std => 'address';
 
 # Note: no default for address, but different salary
 
@@ -60,6 +68,11 @@ sub DEFAULTS {
     first_name => 'Johan',
 }
 
+
+sub address {
+    return $_[0]->{address} if @_ == 1;
+    $_[0]->{address} = $_[1];
+}
 
 
 package main;

@@ -14,4 +14,4 @@ no_index:
   directory: 
     - inc
     - t
-version: 1.01
+version: 1.02

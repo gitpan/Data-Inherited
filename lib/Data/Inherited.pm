@@ -5,7 +5,7 @@ package Data::Inherited;
 use strict;
 use warnings;
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
 
 sub every_list {
@@ -315,8 +315,7 @@ context.
 The cache and the optional cache override argument work like with
 C<every_list()>.
 
-Example (see L<Class::MethodMaker::Util> for a full implementation of instance
-defaults and much more):
+Example:
 
   package Person;
   use base 'Data::Inherited';
