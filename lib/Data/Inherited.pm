@@ -5,7 +5,7 @@ package Data::Inherited;
 use strict;
 use warnings;
 
-our $VERSION = '1.02';
+our $VERSION = '1.04';
 
 
 sub every_list {
@@ -335,7 +335,7 @@ Example:
   };
 
 
-  package Salaryman;
+  package Employee;
   use base 'Person';
 
   sub DEFAULTS {
@@ -343,8 +343,8 @@ Example:
   }
 
 
-  package LocatedSalaryman;
-  use base 'Salaryman';
+  package LocatedEmployee;
+  use base 'Employee';
 
   # Note: no default for address, but different salary
 
@@ -355,7 +355,7 @@ Example:
 
 
   package main;
-  my $p = LocatedSalaryman->new;
+  my $p = LocatedEmployee->new;
 
   # salary: 20000
   # first_name: Johan

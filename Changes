@@ -1,12 +1,19 @@
 Revision history for Perl extension Data::Inherited.
 
+1.04  Do Okt 18 10:09:39 CEST 2007
+        - fixed version requirement of Test::More
+        - added t/perlcriticrc
+
+1.03  Mo Sep 10 15:39:09 CEST 2007
+        - s/Salaryman/Employee/g
+
 1.02  So Sep  9 22:15:47 CEST 2007
-    - fixed t/01_defaults.t
+        - fixed t/01_defaults.t
 
 1.01  Sa Sep  8 14:11:38 CEST 2007
-    - changed to new-style distribution (ShipIt, Module::Install)
-    - fixed documentation and test file locations
+        - changed to new-style distribution (ShipIt, Module::Install)
+        - fixed documentation and test file locations
 
 1.00  Wed Oct 19 15:14:17 MSZ 2005
-    - original version
+        - original version
 

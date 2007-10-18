@@ -42,7 +42,7 @@ sub last_name {
 }
 
 
-package Salaryman;
+package Employee;
 
 our @ISA = 'Person';
 
@@ -57,9 +57,9 @@ sub salary {
 }
 
 
-package LocatedSalaryman;
+package LocatedEmployee;
 
-our @ISA = 'Salaryman';
+our @ISA = 'Employee';
 
 # Note: no default for address, but different salary
 
@@ -99,14 +99,14 @@ is_deeply(\%defaults, {
 }, 'defaults in hash context');
 
 
-$p = Salaryman->new;
+$p = Employee->new;
 ok_prop($p,
     first_name => 'John',
     last_name  => 'Smith',
     salary     => 10_000,
 );
 
-$p = LocatedSalaryman->new;
+$p = LocatedEmployee->new;
 ok_prop($p,
     first_name => 'Johan',
     last_name  => 'Smith',
