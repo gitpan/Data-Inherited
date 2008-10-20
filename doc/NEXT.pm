@@ -1,5 +1,5 @@
 package NEXT;
-$VERSION = '0.60';
+$VERSION = '1.06';
 use Carp;
 use strict;
 use overload ();

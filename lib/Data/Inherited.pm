@@ -5,7 +5,8 @@ package Data::Inherited;
 use strict;
 use warnings;
 
-our $VERSION = '1.04';
+
+our $VERSION = '1.06';
 
 
 sub every_list {
@@ -82,28 +83,31 @@ no warnings 'redefine';
 
 sub NEXT::ELSEWHERE::ancestors
 {
-    my @inlist = shift;
-    my @outlist = ();
-    while (my $next = shift @inlist) {
-        push @outlist, $next;
-        no strict 'refs';
-        unshift @inlist, @{"$outlist[-1]::ISA"};
+    my $pkg = shift;
+
+    our %ancestors_cache;
+    my $outlist;
+
+    unless ($outlist = $ancestors_cache{$pkg}) {
+        my @inlist = $pkg;
+        my @outlist = ();
+        while (my $next = shift @inlist) {
+            push @outlist, $next;
+            no strict 'refs';
+            unshift @inlist, @{"$outlist[-1]::ISA"};
+        }
+        $ancestors_cache{$pkg} = $outlist = \@outlist;
     }
-    return @outlist;
+
+    @$outlist;
 }
 
 sub NEXT::ELSEWHERE::ordered_ancestors
 {
-    my @inlist = shift;
-    my @outlist = ();
-    while (my $next = shift @inlist) {
-        push @outlist, $next;
-        no strict 'refs';
-        push @inlist, @{"$outlist[-1]::ISA"};
-    }
     return sort { $a->isa($b) ? -1
                 : $b->isa($a) ? +1
-                :                0 } @outlist;
+                :                0 }
+        NEXT::ELSEWHERE::ancestors(@_);
 }
 
 sub AUTOLOAD
@@ -241,13 +245,11 @@ sub AUTOLOAD
 
 __END__
 
+
+
 =head1 NAME
 
 Data::Inherited - hierarchy-wide accumulation of list and hash results
-
-=head1 VERSION
-
-This document describes version 1.00 of C<Data::Inherited>.
 
 =head1 SYNOPSIS
 
@@ -380,8 +382,7 @@ with the original L<NEXT> if somewhere it says C<use NEXT>.
 
 No bugs have been reported.
 
-Please report any bugs or feature requests to
-C<bug-data-inherited@rt.cpan.org>, or through the web interface at
+Please report any bugs or feature requests through the web interface at
 L<http://rt.cpan.org>.
 
 =head1 INSTALLATION
@@ -394,16 +395,17 @@ The latest version of this module is available from the Comprehensive Perl
 Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a CPAN
 site near you. Or see <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
 
-=head1 AUTHOR
+=head1 AUTHORS
 
 Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004-2007 by Marcel GrE<uuml>nauer
+Copyright 2004-2008 by the authors.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
+
 
 =cut
 
