@@ -1,6 +1,6 @@
 # no strict 'refs'
 [TestingAndDebugging::ProhibitNoStrict]
-allow = refs vars
+allow = refs
 
 [-BuiltinFunctions::ProhibitStringyEval]
 [-ControlStructures::ProhibitMutatingListFunctions]

@@ -1,5 +1,9 @@
 Revision history for Perl extension Data-Inherited
 
+1.07 Wed 2010.02.10 10:46:37 CET (Marcel Gruenauer <marcel@cpan.org>)
+     - removed the patched NEXT.pm and its tests since NEXT 0.64 now works like
+       we want it to (with regards to stringification-overloaded hash keys)
+
 1.06  Mon Oct 20 19:16:05 CEST 2008 (Marcel Gruenauer <marcel@cpan.org>)
      - Changed dist style and Changes back to standard. People didn't like it -
        the nail that sticks out gets hammered down.
