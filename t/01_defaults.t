@@ -4,7 +4,7 @@ use strict;
 use Test::More tests => 15;
 
 package Person;
-use base 'Data::Inherited';
+use parent 'Data::Inherited';
 
 sub DEFAULTS {
     first_name  => 'John',

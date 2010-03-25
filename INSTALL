@@ -1,9 +1,10 @@
-This is the Perl module Data::Inherited.
+
+This is the Perl distribution Data-Inherited.
 
 ## Installation
 
-Data::Inherited installation is straightforward. If your CPAN shell is set up,
-you should just be able to do
+Data-Inherited installation is straightforward.
+If your CPAN shell is set up, you should just be able to do
 
     % cpan Data::Inherited
 
@@ -18,10 +19,9 @@ Then install it:
 
 ## Documentation
 
-Data::Inherited documentation is available as in POD. So you can do:
+Data-Inherited documentation is available as in POD.
+So you can do:
 
     % perldoc Data::Inherited
 
-to read the documentation online with your favorite pager.
-
-Marcel Gruenauer
+to read the documentation with your favorite pager.

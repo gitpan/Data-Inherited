@@ -4,7 +4,7 @@ use strict;
 use Test::More tests => 5;
 
 package Foo::Base;
-use base 'Data::Inherited';
+use parent 'Data::Inherited';
 use constant PLAN => 11;
 
 sub planned_test_count {

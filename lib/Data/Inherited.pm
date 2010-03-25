@@ -1,9 +1,11 @@
-package Data::Inherited;
-use 5.006;
+use 5.008;
 use strict;
 use warnings;
+
+package Data::Inherited;
+our $VERSION = '1.100850';
+# ABSTRACT: Hierarchy-wide accumulation of list and hash results
 use NEXT;
-our $VERSION = '1.07';
 
 sub every_list {
     my ($self, $list_name, $override_cache) = @_;
@@ -48,11 +50,18 @@ sub flush_every_cache_by_key {
     delete $every_cache{$key};
 }
 1;
+
+
 __END__
+=pod
 
 =head1 NAME
 
 Data::Inherited - Hierarchy-wide accumulation of list and hash results
+
+=head1 VERSION
+
+version 1.100850
 
 =head1 SYNOPSIS
 
@@ -68,11 +77,11 @@ Data::Inherited - Hierarchy-wide accumulation of list and hash results
   my $bar = Bar->new;
   print "$_\n" for $bar->every_list('PROPERTIES');
 
-prints
-
-  name
-  address
-  age
+  # prints:
+  #
+  # name
+  # address
+  # age
 
 =head1 DESCRIPTION
 
@@ -81,9 +90,7 @@ to accumulate hierarchy-wide list and hash results.
 
 =head1 METHODS
 
-=over 4
-
-=item C<every_list(String $method_name, Bool ?$override_cache = 0)>
+=head2 every_list(String $method_name, Bool ?$override_cache = 0)
 
 Takes as arguments a method name (mandatory) and a boolean indicating whether
 to override the cache (optional, off by default)
@@ -105,7 +112,7 @@ optional second argument. The result is cached in any case.
 
 See the synopsis for an example.
 
-=item C<every_hash(String $method_name, Bool ?$override_cache = 0)>
+=head2 every_hash(String $method_name, Bool ?$override_cache = 0)
 
 Takes as arguments a method name (mandatory) and a boolean indicating whether
 to override the cache (optional, off by default)
@@ -163,38 +170,43 @@ Example:
   # first_name: Johan
   # last_name: Smith
 
-=item C<flush_every_cache_by_key(String $key)>
+=head2 flush_every_cache_by_key(String $key)
 
 Deletes the cache entry for the given key.
 
-=back
+=head1 INSTALLATION
+
+See perlmodinstall for information and options on installing Perl modules.
 
 =head1 BUGS AND LIMITATIONS
 
 No bugs have been reported.
 
 Please report any bugs or feature requests through the web interface at
-L<http://rt.cpan.org>.
-
-=head1 INSTALLATION
-
-See perlmodinstall for information and options on installing Perl modules.
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=Data-Inherited>.
 
 =head1 AVAILABILITY
 
 The latest version of this module is available from the Comprehensive Perl
-Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a CPAN
-site near you. Or see L<http://search.cpan.org/dist/Data-Domain-URI/>.
+Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
+site near you, or see
+L<http://search.cpan.org/dist/Data-Inherited/>.
 
-=head1 AUTHORS
+The development version lives at
+L<http://github.com/hanekomu/Data-Inherited/>.
+Instead of sending patches, please fork this project using the standard git
+and github infrastructure.
 
-Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
+=head1 AUTHOR
+
+  Marcel Gruenauer <marcel@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004-2009 by the authors.
+This software is copyright (c) 2004 by Marcel Gruenauer.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
+
