@@ -9,7 +9,7 @@
       "version" : 1.4,
       "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
    },
-   "version" : "1.100850",
+   "version" : "1.100860",
    "name" : "Data-Inherited",
    "author" : [
       "Marcel Gruenauer <marcel@cpan.org>"
@@ -18,7 +18,7 @@
    "build_requires" : {},
    "provides" : {
       "Data::Inherited" : {
-         "version" : "1.100850",
+         "version" : "1.100860",
          "file" : "lib/Data/Inherited.pm"
       }
    },
@@ -27,7 +27,7 @@
       "parent" : "0",
       "English" : "0",
       "overload" : "0",
-      "NEXT" : "0",
+      "NEXT" : "0.64",
       "constant" : "0",
       "Carp" : "0",
       "Test::More" : "0.88",

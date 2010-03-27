@@ -3,9 +3,9 @@ use strict;
 use warnings;
 
 package Data::Inherited;
-our $VERSION = '1.100850';
+our $VERSION = '1.100860';
 # ABSTRACT: Hierarchy-wide accumulation of list and hash results
-use NEXT;
+use NEXT 0.64;
 
 sub every_list {
     my ($self, $list_name, $override_cache) = @_;
@@ -61,7 +61,7 @@ Data::Inherited - Hierarchy-wide accumulation of list and hash results
 
 =head1 VERSION
 
-version 1.100850
+version 1.100860
 
 =head1 SYNOPSIS
 

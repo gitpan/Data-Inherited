@@ -2,7 +2,7 @@ NAME
     Data::Inherited - Hierarchy-wide accumulation of list and hash results
 
 VERSION
-    version 1.100850
+    version 1.100860
 
 SYNOPSIS
       package Foo;
